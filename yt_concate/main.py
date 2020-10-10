@@ -23,8 +23,8 @@ def get_all_video_in_channel(channel_id):
 
         try:
             next_page_token = resp['nextPageToken']
-            url = first_url + '&pageToken={}'.format(next_page_token)
-        except:
+            url = first_url + '&pageToken={}'.format(next_page_token
+        except KeyError:
             break
     return video_links
 
