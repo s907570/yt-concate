@@ -1,10 +1,13 @@
 import urllib.request
 import json
 
+import os
+
 CHANNEL_ID='UCKSVUHI9rbbkXhvAXK-2uxA'
 
 def get_all_video_in_channel(channel_id):
-    api_key = 'AIzaSyBxuo_MJhoOon3Z7Z94Q_CDjNp9WcIFw2Q'
+
+    api_key = os.getenv('API_KEY')
 
     base_video_url = 'https://www.youtube.com/watch?v='
     base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
@@ -14,7 +17,12 @@ def get_all_video_in_channel(channel_id):
     video_links = []
     url = first_url
     while True:
-        inp = urllib.request.urlopen(url)
+        headers = {'User - Agent': 'Mozilla / 5.0(Windows NT 6.1) AppleWebKit / 537.36(KHTML, like Gecko)Chrome / 41.0.2228.0 Safari / 537.3'}
+
+        req = urllib.request.Request(url, headers = headers)
+
+        inp = urllib.request.urlopen(req)
+
         resp = json.load(inp)
 
         for i in resp['items']:
